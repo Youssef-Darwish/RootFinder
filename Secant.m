@@ -9,7 +9,6 @@ variable = '@(x)';
 str = strcat(variable,polynomial);
 
 fh = str2func(str);
-derivative = diff(fh);
 %initializing empty vectors to hold results
 errorsVector = [];
 iterationsVector=[];
@@ -41,9 +40,9 @@ end
        errorsVector = transpose(errorsVector);
        appRootsVector = transpose(appRootsVector);   % or [appRootsVector]'
        iterationsVector = transpose(iterationsVector); 
-       toc;
+       time = toc;
        %fid = fopen('Results.txt','w')
        %fprintf(fid,'%f\n',a)
        %fprintf('%f\t\t%f\t\t%f\t\t\n\n', [iterationsVector,errorsVector,appRootsVector],]')
-       
+       %fprintf('%f',time);
        answer = cat(2,iterationsVector,errorsVector,appRootsVector);

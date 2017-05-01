@@ -7,22 +7,26 @@ tic;
 
 variable = '@(x)';
 str = strcat(variable,polynomial);
-
 fh = str2func(str);
-derivative = diff(fh);
+
+dif = diff(sym(fh));
+derivative = sym(dif)
+derivative(0.2)
 %initializing empty vectors to hold results
 errorsVector = [];
 iterationsVector=[];
 appRootsVector=[];
 error = 100;
 iterations = 0;
-previousRootApproximation =0 ;
 %fplot (fh,[lowerBound,upperBound]) ---> needs limits for plotting the
 %functions
-grid on
+%grid on
 previousRootApproximation = initialGuess;
+currentRootApproximation=0;
 while error>predefinedError && iterations<maxIterations
   
+    
+   
   currentRootApproximation = previousRootApproximation  - (fh(previousRootApproximation)/derivative(currentRootApproximation));
   
   %disp(fh(currentRootApproximation))

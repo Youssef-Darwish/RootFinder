@@ -1,7 +1,7 @@
 function answer  = bisection(lowerBound,upperBound,polynomial,maxIterations,predefinedError)
 %Calculates the root of polynomial with the given parameters using bisection methods
 
-disp(predefinedError)
+%disp(predefinedError)
 
 %using tic;toc; to calculate the elapsed time;
 tic;
@@ -45,6 +45,6 @@ end
        errorsVector = transpose(errorsVector);
        appRootsVector = transpose(appRootsVector);   % or [appRootsVector]'
        iterationsVector = transpose(iterationsVector); 
-       toc;
+       time = toc;
        
        answer = cat(2,iterationsVector,errorsVector,appRootsVector);
