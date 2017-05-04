@@ -3,51 +3,59 @@ function answer = GaussJordan(A,B)
   
   %A is coefficients matrix : Ax=b
   
-  %gaussian elimination code
-  
-  %vector to hold the results
-  var = [];
+  tic;
   
   dimensions = size(A);
   if (dimensions(1)~=dimensions(2))
     error("coefficients matrix must be a square matrix");
   end
+  n = dimensions(1);
   %Augmented Matrix : [A|B]
- 
-   A = [A B]; 
-   %forward substitution
-   n = dimensions(1);
-   
-   %steps :
-   % find pivot using max()
-   %scaling the row of pivot 
-   %elimination with all other rows
-   
-   maxRow = [];
-   for k = 1 : n
-      maxElements = max(A);
-      
-      for i = k+1 : n
-          factor = A(i,k)/A(k,k);
-          for j = k+1 : n
-              A(i,j) = A(i,j) - (factor * A(k,j));
-          end
-          B(i) = B(i) - (factor * B(k));
-      end
+   AugmentedA = [A B]; 
+   AugmentedA = [A,B];
+   for i=1:n 
+        [AugmentedA(i:n,i:n+1),err]=pivot(AugmentedA(i:n,i:n+1));
+        if err == 0
+            AugmentedA(1:n,i:n+1)=step(AugmentedA(1:n,i:n+1),i);
+        end
    end
-   %disp(B);
-   %disp("passed")
-   %forward substitution checked
-  
-  %back Substitution
-  var(n) = B(n)/A(n,n);  
- for i  = n-1 : -1 : 1   %inverse loop syntax
-    sum =0;
-    for j = i+1 :n
-      sum = sum + (A(i,j) * var(j));
-    end 
-    var(i) = (B(i)-sum)/A(i,i);
+    x=AugmentedA(:,n+1);
+    time = toc
+ answer = x;
  
- end
- answer = var';
+function [subMatrix,err]=pivot(A)
+%This function swaps rows if pivot equals zero
+[n,m]=size(A); 
+subMatrix=A;
+err = 0; % error flag
+if subMatrix(1,1) == 0  % if the pivot element is zero we need to exchange rows
+    check = logical(1); 
+    i = 1;
+    while check
+        i = i + 1;
+        if i > n  % reached the last row and no non-zero element is found
+            err = 1;
+            check = logical(0);
+        else
+            if A(i,1) ~= 0 & check
+                check = logical(0);
+                b=A1(i,:);      %exchange rows 1 and i
+                subMatrix(i,:)=subMatrix(1,:);
+                subMatrix(1,:)=b;
+            end
+        end
+    end
+end
  
+function subMatrix=step(A,i)
+
+[n,m]=size(A);
+subMatrix=A;
+s=subMatrix(i,1);             
+subMatrix(i,:) = A(i,:)/s;    %scaling
+k=[[1:i-1],[i+1:n]]           %
+for j=k
+    s=subMatrix(j,1);
+    subMatrix(j,:)=subMatrix(j,:)-subMatrix(i,:)*s;
+end
+
