@@ -9,8 +9,7 @@ variable = '@(x)';
 str = strcat(variable,polynomial);
 fh = str2func(str);
 
-dif = diff(sym(fh));
-derivative = sym(dif)
+derivative = diff(fh,x);
 derivative(0.2)
 %initializing empty vectors to hold results
 errorsVector = [];
