@@ -4,13 +4,17 @@ function answer  = NewtonRaphson(initialGuess,polynomial,maxIterations,predefine
 
 %using tic;toc; to calculate the elapsed time;
 tic;
-
 variable = '@(x)';
 str = strcat(variable,polynomial);
+
 fh = str2func(str);
 
-derivative = diff(fh,x);
-derivative(0.2)
+s = vectorize(char(polynomial));
+eval(['polynomial = @(x)',s]);
+   
+syms x;
+derivative = diff(polynomial,x);
+
 %initializing empty vectors to hold results
 errorsVector = [];
 iterationsVector=[];
@@ -21,12 +25,13 @@ iterations = 0;
 %functions
 %grid on
 previousRootApproximation = initialGuess;
-currentRootApproximation=0;
+currentRootApproximation=initialGuess;
 while error>predefinedError && iterations<maxIterations
   
-    
+   %handling diviion by zero
+   %precision
    
-  currentRootApproximation = previousRootApproximation  - (fh(previousRootApproximation)/derivative(currentRootApproximation));
+  currentRootApproximation = previousRootApproximation  - (fh(previousRootApproximation)/subs(derivative,currentRootApproximation));
   
   %disp(fh(currentRootApproximation))
   iterations = iterations+1;
