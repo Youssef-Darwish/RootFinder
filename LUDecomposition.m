@@ -40,8 +40,11 @@ end
     x(j)=d(j)/U(j,j);
     d(1:j-1)=d(1:j-1)-U(1:j-1,j)*x(j);
     end
-   
-   
-   
+fileID = fopen('output.txt','w'); 
+for i=1:n
+fprintf(fileID,'%6s%d=','x',i);
+fprintf(fileID,'%f\n',x(i));
+end
+fclose(fileID);    
    
 end
