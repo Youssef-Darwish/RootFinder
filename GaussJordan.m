@@ -7,7 +7,7 @@ function answer = GaussJordan(A,B)
   
   dimensions = size(A);
   if (dimensions(1)~=dimensions(2))
-    error("coefficients matrix must be a square matrix");
+    error('coefficients matrix must be a square matrix');
   end
   n = dimensions(1);
   %Augmented Matrix : [A|B]
@@ -20,7 +20,7 @@ function answer = GaussJordan(A,B)
         end
    end
     x=AugmentedA(:,n+1);
-    time = toc
+    time = toc;
  answer = x;
  
 function [subMatrix,err]=pivot(A)
