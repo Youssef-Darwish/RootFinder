@@ -31,7 +31,7 @@ while error>predefinedError && iterations<maxIterations
   iterations = iterations+1
   iterationsVector = [iterationsVector iterations];
   error = (currentRootApproximation-previousRootApproximation)/currentRootApproximation;
-  error = error *100
+  error =abs( error *100);
   errorsVector = [errorsVector error ];
   previousRootApproximation = currentRootApproximation;
   appRootsVector = [appRootsVector previousRootApproximation];
