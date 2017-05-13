@@ -30,8 +30,7 @@ while error>predefinedError && iterations<maxIterations
   %disp(fh(currentRootApproximation))
   iterations = iterations+1;
   iterationsVector = [iterationsVector iterations];
-  error = (currentRootApproximation-previousRootApproximation)/currentRootApproximation;
-  error = abs(error *100);
+  error = abs(currentRootApproximation-previousRootApproximation);
   errorsVector = [errorsVector error ];
   previousRootApproximation = currentRootApproximation;
   appRootsVector = [appRootsVector previousRootApproximation];

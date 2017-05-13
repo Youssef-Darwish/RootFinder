@@ -18,8 +18,6 @@ appRootsVector=[];
 error = 100;
 iterations = 0;
 previousRootApproximation =0 ;
-fplot (fh,[lowerBound,upperBound])
-grid on
 while error>predefinedError && iterations<maxIterations
   
   currentRootApproximation = (lowerBound + upperBound)/2;
@@ -33,8 +31,7 @@ while error>predefinedError && iterations<maxIterations
   elseif (checkFunction ==0)
   iterations = iterations+1;
   iterationsVector = [iterationsVector iterations];
-  error = (currentRootApproximation-previousRootApproximation)/currentRootApproximation;
-  error = abs(error *100);
+  error = abs(currentRootApproximation-previousRootApproximation);
   errorsVector = [errorsVector error ];
   previousRootApproximation = currentRootApproximation;
   appRootsVector = [appRootsVector previousRootApproximation];
@@ -43,8 +40,7 @@ while error>predefinedError && iterations<maxIterations
   end
   iterations = iterations+1;
   iterationsVector = [iterationsVector iterations];
-  error = (currentRootApproximation-previousRootApproximation)/currentRootApproximation;
-  error = abs(error *100);
+  error = abs(currentRootApproximation-previousRootApproximation);
   errorsVector = [errorsVector error ];
   previousRootApproximation = currentRootApproximation;
   appRootsVector = [appRootsVector previousRootApproximation];
