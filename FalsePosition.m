@@ -13,14 +13,14 @@ error = 100;
 iterations = 0;
 previousRootApproximation =0 ;
 
-%replace bisection method with false position
+fplot (fh,[lowerBound,upperBound])
+grid on
 while error>predefinedError && iterations<maxIterations
   
-  currentRootApproximation = ((lowerBound*fh(upperBound)) - (upperBound*fh(lowerBound)))/(fh(upperBound)
-  -fh(lowerBound));
-  
+    previousRootApproximation
+  currentRootApproximation = ((lowerBound*fh(upperBound)) - (upperBound*fh(lowerBound)))/(fh(upperBound)-fh(lowerBound));
+  currentRootApproximation
   checkFunction = fh(currentRootApproximation);
-  disp(fh(currentRootApproximation))
   if (checkFunction <0)
     lowerBound = currentRootApproximation;
   elseif (checkFunction >0)
@@ -30,7 +30,7 @@ while error>predefinedError && iterations<maxIterations
   end
   iterations = iterations+1
   iterationsVector = [iterationsVector iterations];
-  error = (currentRootApproximation-previousRootApproximation)/currentRootApproximation;
+  error = (currentRootApproximation-previousRootApproximation)/currentRootApproximation
   error =abs( error *100);
   errorsVector = [errorsVector error ];
   previousRootApproximation = currentRootApproximation;
@@ -41,4 +41,4 @@ end
        appRootsVector = transpose(appRootsVector);
        iterationsVector = transpose(iterationsVector); 
        % plotting the function --> not yet
-       answer = cat(2,iterationsVector,errorsVector,appRootsVector)
+       answer = cat(2,iterationsVector,errorsVector,appRootsVector);

@@ -31,6 +31,14 @@ while error>predefinedError && iterations<maxIterations
   elseif (checkFunction >0)
     lowerBound = currentRootApproximation;
   elseif (checkFunction ==0)
+  iterations = iterations+1;
+  iterationsVector = [iterationsVector iterations];
+  error = (currentRootApproximation-previousRootApproximation)/currentRootApproximation;
+  error = abs(error *100);
+  errorsVector = [errorsVector error ];
+  previousRootApproximation = currentRootApproximation;
+  appRootsVector = [appRootsVector previousRootApproximation];
+  
     break
   end
   iterations = iterations+1;
