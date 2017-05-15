@@ -24,7 +24,7 @@ end
 
 %pivoting and swapping function
 % where k is the column index
-function pivot(A,indeces,k,n)
+function pivot(A,k,n)
  p=k;
  largestElement=A(indeces(k),k);
  for l=k+1:n
@@ -38,15 +38,11 @@ function pivot(A,indeces,k,n)
  indeces(k)=temp;
 end
 
-
-
-%fills first row of U with same values of elements in A
-for j=1:n
-    U(1,j)=A(1,j);
-end
 %Gauss Elimination
    for k = 1 : n-1
-       pivot(A,indeces,k,n);
+       if(A(indeces(k),k)==0)
+       pivot(A,k,n);
+       end
       for i = k+1 : n
           factor = A(indeces(i),k)/A(indeces(k),k);
           L(i,k)=factor;
@@ -56,15 +52,18 @@ end
           end
       end
    end
+for j=1:n
+    U(1,j)=A(indeces(1),j);
+end
 %forward substitution  
    for j=1:n
-      d(j)=B(indeces(j))/L(j,j);
-      B(indeces(j+1:n))=B(indeces(j+1:n))-L(j+1:n,j)*d(j);
+      d(indeces(j))=B(indeces(j))/L(j,j);
+      B(indeces(j+1:n))=B(indeces(j+1:n))-L(j+1:n,j)*d(indeces(j));
    end 
 %backward substitution
     for j=n:-1:1
-    x(j)=d(j)/U(j,j);
-    d(1:j-1)=d(1:j-1)-U(1:j-1,j)*x(j);
+    x(j)=d(indeces(j))/U(j,j);
+    d(indeces(1:j-1))=d(indeces(1:j-1))-U(1:j-1,j)*x(j);
     end
 fileID = fopen('output.txt','w'); 
 for i=1:n
