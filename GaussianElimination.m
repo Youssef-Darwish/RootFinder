@@ -13,11 +13,24 @@ function answer = GaussianElimination(A,B)
    %forward substitution
    n = dimensions(1);
    for k = 1 : n-1
+      %get max elements and their indices
+      [M I] = max(A);
+      %swapping
+      if(A(k,k)==0)
+        temp = A(k,:);
+        A(k,:) = A(I(k),:);
+        A(I(k),:) = temp;
+        temp = B(k,:);
+        B(k,:) = B(I(k),:);
+        B(I(k),:) = temp;
+      end
       for i = k+1 : n
-          factor = A(i,k)/A(k,k);
-          for j = k+1 : n
+       % disp("pivot");
+       %disp(A(k,k));
+        factor = A(i,k)/A(k,k);
+        for j = k+1 : n
               A(i,j) = A(i,j) - (factor * A(k,j));
-          end
+        end
           B(i) = B(i) - (factor * B(k));
       end
    end
@@ -37,3 +50,4 @@ function answer = GaussianElimination(A,B)
  end
  answer = var';
  
+
