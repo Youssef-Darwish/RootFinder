@@ -37,11 +37,7 @@ function answer = GaussianElimination(A,B)
  end
  answer = var';
 end
-% function pivot = pivot(A)
-% pivot = A;
-% if ( det(A) == 0)
-%      pivot = zeros(size(A));
-%      return;
-% end
-% 
-% end
+function pivot = pivot(A)
+pivot = A;
+if ( det(A) == 0)
+emd

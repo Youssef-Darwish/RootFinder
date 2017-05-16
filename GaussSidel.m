@@ -19,6 +19,7 @@ function [answer,err] = GaussSidel( A,B,thres,maxIterations )
   t = zeros(n,1)+[1;0;1];
   err = zeros(n,1)+100;
   totalErr = zeros(n,1)';
+  roots = zeros(n,1);
   maxErr = 1;
   while ((maxErr > thres) && (maxIterations > 0) )
     maxErr = 0;
@@ -45,9 +46,14 @@ function [answer,err] = GaussSidel( A,B,thres,maxIterations )
     t(i,1) = x(i,1);
   end
   maxIterations = maxIterations-1;
+  roots = [roots x];
   totalErr = [totalErr;err']; %optimize this by setting totalErr initialy with dimension of max iterations.
   end
   err = totalErr(2:end,:);
   answer = x;
+  figure1 = figure
+  plot((1:size(roots,2)),roots(1,:));
+  saveas(figure1,'root1.jpg')
+  
 end
 
