@@ -9,7 +9,9 @@ function answer = GaussianElimination(A,B)
   if (dimensions(1)~=dimensions(2))
     error('coefficients matrix must be a square matrix');
   end
-   if(det
+   if(det(A) ~= 0)
+       [A,B] = pivot(A,B);
+   end
    %forward substitution
    n = dimensions(1);
    for k = 1 : n-1
