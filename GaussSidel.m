@@ -1,9 +1,9 @@
-function [answer,err,roots] = GaussSidel( A,B,thres,maxIterations )
+function [answer,err,roots,time] = GaussSidel( A,B,thres,maxIterations )
 %solves systems of linear equations using Gauss-Jordan Elimination
   
   %A is coefficients matrix : Ax=b
   
-  %tic;
+  tic;
   
   dimensions = size(A);
   if (dimensions(1)~=dimensions(2))
@@ -51,6 +51,7 @@ function [answer,err,roots] = GaussSidel( A,B,thres,maxIterations )
   maxIterations = maxIterations-1;
   roots = [roots x];
   end
+  time = toc;
   answer = x;
 end
 

@@ -1,9 +1,10 @@
-function answer = GaussianElimination(A,B)
+function [answer,time] = GaussianElimination(A,B)
   %solves systems of linear equations using Naive Gaussian Elimination
   
   %A is coefficients matrix : Ax=b
   
   %vector to hold the results
+  tic;
   var = [];
   dimensions = size(A);
   if (dimensions(1)~=dimensions(2))
@@ -38,3 +39,4 @@ function answer = GaussianElimination(A,B)
  
  end
  answer = var';
+ time = toc;
